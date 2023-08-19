@@ -1,0 +1,55 @@
+import pygame
+import sys
+
+# Inicialização do Pygame
+pygame.init()
+
+# Configurações do jogo
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+
+# Cores
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+
+# Inicialização da tela
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Dino Escape")
+
+# Carregar imagem do dinossauro
+dino_image = pygame.Surface((50, 50))
+dino_image.fill(BLUE)
+
+# Posição inicial do dinossauro
+dino_x = SCREEN_WIDTH // 2
+dino_y = SCREEN_HEIGHT - 60
+
+# Velocidade do dinossauro
+dino_velocity = 5
+
+# Loop principal do jogo
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Captura de teclas pressionadas
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        dino_x -= dino_velocity
+    if keys[pygame.K_RIGHT]:
+        dino_x += dino_velocity
+
+    # Atualização da tela
+    screen.fill(WHITE)
+    screen.blit(dino_image, (dino_x, dino_y))
+    pygame.display.flip()
+
+    # Controle de FPS
+    pygame.time.Clock().tick(FPS)
+
+# Encerramento do Pygame
+pygame.quit()
+sys.exit()
